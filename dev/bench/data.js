@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662560753433,
+  "lastUpdate": 1662566416736,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -135,6 +135,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00004622788674998619",
             "extra": "mean: 12.85941261039182 msec\nrounds: 77"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "julien.calisto@quandela.com",
+            "name": "Julien Calisto",
+            "username": "julienCALISTO"
+          },
+          "committer": {
+            "email": "julien.calisto@quandela.com",
+            "name": "Julien Calisto",
+            "username": "julienCALISTO"
+          },
+          "distinct": true,
+          "id": "2ffbe043c754f75c3ffe6dfe20c52eda898afd55",
+          "message": "benchmark with correct path",
+          "timestamp": "2022-09-07T17:58:35+02:00",
+          "tree_id": "b4c355862ca8eab7accb25f674c936f4040e3a70",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/2ffbe043c754f75c3ffe6dfe20c52eda898afd55"
+        },
+        "date": 1662566415834,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.26163278211423197,
+            "unit": "iter/sec",
+            "range": "stddev: 0.11078861348702114",
+            "extra": "mean: 3.8221510007999995 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 158.98486344588102,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0006413702919389199",
+            "extra": "mean: 6.289906965516899 msec\nrounds: 145"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 59.23885552517525,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0012139706569549707",
+            "extra": "mean: 16.88081228333355 msec\nrounds: 60"
           }
         ]
       }
