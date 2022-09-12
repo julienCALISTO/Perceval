@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662638097632,
+  "lastUpdate": 1662989853845,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -493,6 +493,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00005302816759811544",
             "extra": "mean: 12.812397051281103 msec\nrounds: 78"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "063ebb8ca3243b5a60a2675555fc52e77dfd2f7c",
+          "message": "try install py on arm64",
+          "timestamp": "2022-09-12T13:31:30Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/063ebb8ca3243b5a60a2675555fc52e77dfd2f7c"
+        },
+        "date": 1662989840705,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.24257606387287473,
+            "unit": "iter/sec",
+            "range": "stddev: 0.03937585970544529",
+            "extra": "mean: 4.122418280000057 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 128.46998117379474,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007877040437227485",
+            "extra": "mean: 7.783919565203296 msec\nrounds: 92"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 39.596367137500444,
+            "unit": "iter/sec",
+            "range": "stddev: 0.001802270373412292",
+            "extra": "mean: 25.254842105273145 msec\nrounds: 38"
           }
         ]
       }
