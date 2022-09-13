@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663063739916,
+  "lastUpdate": 1663073553482,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -751,6 +751,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000019175445622247614",
             "extra": "mean: 5.586091891428587 msec\nrounds: 175"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "bd410553c0acf295f80ae3a3f08bba4f8cc0df4d",
+          "message": "run compare pytest benchmark.v2",
+          "timestamp": "2022-09-13T12:50:55Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/bd410553c0acf295f80ae3a3f08bba4f8cc0df4d"
+        },
+        "date": 1663073551757,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.768620095598348,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005857639864502649",
+            "extra": "mean: 1.3010328584000002 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 580.2295699670323,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00003083600631683164",
+            "extra": "mean: 1.7234557695100206 msec\nrounds: 551"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 178.7023347022867,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00003033574487713808",
+            "extra": "mean: 5.595897790960444 msec\nrounds: 177"
           }
         ]
       }
