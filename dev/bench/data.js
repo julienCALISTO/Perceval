@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662989853845,
+  "lastUpdate": 1663059344804,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -536,6 +536,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.001802270373412292",
             "extra": "mean: 25.254842105273145 msec\nrounds: 38"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "f42b7b33ab9d44af42f74a67233dc8476bef66d3",
+          "message": "install py in cache",
+          "timestamp": "2022-09-13T08:51:03Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/f42b7b33ab9d44af42f74a67233dc8476bef66d3"
+        },
+        "date": 1663059336003,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.3375992464136616,
+            "unit": "iter/sec",
+            "range": "stddev: 0.010282483818515228",
+            "extra": "mean: 2.9620919200000118 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 168.2598205833553,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0001349583748011454",
+            "extra": "mean: 5.943189506163795 msec\nrounds: 162"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 49.64106973867786,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0001282867690260277",
+            "extra": "mean: 20.144610204095777 msec\nrounds: 49"
           }
         ]
       }
