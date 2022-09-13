@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663063405190,
+  "lastUpdate": 1663063481352,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -665,6 +665,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000210945663175451",
             "extra": "mean: 5.592690391061585 msec\nrounds: 179"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "test",
+            "username": "test",
+            "email": "test@users.noreply.github.com"
+          },
+          "committer": {
+            "name": "test",
+            "username": "test",
+            "email": "test@users.noreply.github.com"
+          },
+          "id": "d2928d1e5df013debb5c6bf67030d1cda22feb33",
+          "message": "Automated benchmark report",
+          "timestamp": "2022-09-13T10:03:27Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/d2928d1e5df013debb5c6bf67030d1cda22feb33"
+        },
+        "date": 1663063479707,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.766181924953755,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0011547785634665843",
+            "extra": "mean: 1.3051730502 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 580.0372524392185,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000030505119406618145",
+            "extra": "mean: 1.724027199623336 msec\nrounds: 531"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 178.87940729992422,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000016959107672024032",
+            "extra": "mean: 5.590358415730415 msec\nrounds: 178"
           }
         ]
       }
