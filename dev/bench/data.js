@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663063481352,
+  "lastUpdate": 1663063739916,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -708,6 +708,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000016959107672024032",
             "extra": "mean: 5.590358415730415 msec\nrounds: 178"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "5c235fd07be82663604dd79d3216eeb83977e2d5",
+          "message": "Merge branch 'benchmark_test' of github.com:julienCALISTO/Perceval into benchmark_test",
+          "timestamp": "2022-09-13T10:07:20Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/5c235fd07be82663604dd79d3216eeb83977e2d5"
+        },
+        "date": 1663063738491,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.7717827233051114,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0015807755599970214",
+            "extra": "mean: 1.2957014582 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 579.9105211924133,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002906001399293037",
+            "extra": "mean: 1.7244039613970064 msec\nrounds: 544"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 179.01603114234845,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000019175445622247614",
+            "extra": "mean: 5.586091891428587 msec\nrounds: 175"
           }
         ]
       }
