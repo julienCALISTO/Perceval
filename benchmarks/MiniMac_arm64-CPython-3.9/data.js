@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663145202955,
+  "lastUpdate": 1663149228823,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -255,6 +255,91 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000020433805662762455",
             "extra": "mean: 5.547649162011345 msec\nrounds: 179"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "3a85c32b3e7cb60ed998ba25ba73be7d8310e3ea",
+          "message": "ubuntu modif.v3",
+          "timestamp": "2022-09-14T09:50:09Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/3a85c32b3e7cb60ed998ba25ba73be7d8310e3ea"
+        },
+        "date": 1663149227472,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_clifford_6",
+            "value": 75.90605843970233,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00007656483859009912",
+            "extra": "mean: 13.174178985915495 msec\nrounds: 71"
+          },
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_slos_6",
+            "value": 11.24022934282945,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004154924437258122",
+            "extra": "mean: 88.96615625000004 msec\nrounds: 12"
+          },
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_naive_6",
+            "value": 1.5049257539747483,
+            "unit": "iter/sec",
+            "range": "stddev: 0.04610554839114419",
+            "extra": "mean: 664.4846081999999 msec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_clifford_8",
+            "value": 206.89262278744107,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00002448778300712516",
+            "extra": "mean: 4.833425119403062 msec\nrounds: 201"
+          },
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_slos_8",
+            "value": 3.5275771141797296,
+            "unit": "iter/sec",
+            "range": "stddev: 0.04231319549047623",
+            "extra": "mean: 283.48069159999943 msec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_naive_8",
+            "value": 0.28631186013887766,
+            "unit": "iter/sec",
+            "range": "stddev: 0.24499662693869817",
+            "extra": "mean: 3.4926949917999996 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper",
+            "value": 0.77154654636688,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005156072949635017",
+            "extra": "mean: 1.2960980833999969 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
+            "value": 586.4827967295088,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000028489418630071676",
+            "extra": "mean: 1.7050798515769752 msec\nrounds: 539"
+          },
+          {
+            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
+            "value": 179.57111912065233,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000019667435187269383",
+            "extra": "mean: 5.568824234637132 msec\nrounds: 179"
           }
         ]
       }
