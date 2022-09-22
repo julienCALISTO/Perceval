@@ -16,7 +16,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "79281f50a95e17dd312dd7c105074c95d579f925",
-          "message": "test benchmark on release/0.7 before PCVL-180",
+          "message": "release/0.7 before PCVL-180",
           "timestamp": "2022-09-22T13:44:06Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/79281f50a95e17dd312dd7c105074c95d579f925"
         },
@@ -136,7 +136,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "79281f50a95e17dd312dd7c105074c95d579f925",
-          "message": "test benchmark on release/0.7 before PCVL-180",
+          "message": "release/0.7 before PCVL-180",
           "timestamp": "2022-09-22T13:44:06Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/79281f50a95e17dd312dd7c105074c95d579f925"
         },
@@ -256,7 +256,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "0eb20f2be0f766e91cf2d153525d5f517e01324f",
-          "message": "test benchmark on release/0.7 before PCVL-180 (2)",
+          "message": "release/0.7 before PCVL-180",
           "timestamp": "2022-09-22T14:21:35Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/0eb20f2be0f766e91cf2d153525d5f517e01324f"
         },
@@ -376,7 +376,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "0eb20f2be0f766e91cf2d153525d5f517e01324f",
-          "message": "test benchmark on release/0.7 before PCVL-180 (2)",
+          "message": "release/0.7 before PCVL-180",
           "timestamp": "2022-09-22T14:21:35Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/0eb20f2be0f766e91cf2d153525d5f517e01324f"
         },
@@ -496,7 +496,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "d76ca4251a7ec800fc0e09c2953009eb12be6300",
-          "message": "test benchmarck PCVL-180",
+          "message": "PCVL-180",
           "timestamp": "2022-09-22T13:50:04Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/d76ca4251a7ec800fc0e09c2953009eb12be6300"
         },
@@ -616,7 +616,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "d76ca4251a7ec800fc0e09c2953009eb12be6300",
-          "message": "test benchmarck PCVL-180",
+          "message": "PCVL-180",
           "timestamp": "2022-09-22T13:50:04Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/d76ca4251a7ec800fc0e09c2953009eb12be6300"
         },
@@ -736,7 +736,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "d76ca4251a7ec800fc0e09c2953009eb12be6300",
-          "message": "test benchmarck PCVL-180",
+          "message": "PCVL-180",
           "timestamp": "2022-09-22T13:50:04Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/d76ca4251a7ec800fc0e09c2953009eb12be6300"
         },
