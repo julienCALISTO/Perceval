@@ -182,10 +182,11 @@
                   label: name,
                   data: dataset.map(d => d.bench.value),
                   borderColor: color,
-                  backgroundColor: color + '60', // Add alpha for #rrggbbaa
+                  backgroundColor: color + '60', // Add alpha for #rrggbbaa,
+                  tension: 0
                 }
               ],
-              tension: 0.1
+              tension: 0
             };
             const options = {
               scales: {
