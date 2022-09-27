@@ -1033,13 +1033,6 @@ window.BENCHMARK_DATA = {
             "extra": "mean: 11.3771242002 sec\nrounds: 5"
           },
           {
-            "name": "benchmark/benchmark_stepper.py::test_stepper",
-            "value": 600.9900176924572,
-            "unit": "iter/sec",
-            "range": "stddev: 0.0059300681949818745",
-            "extra": "mean: 1.6639211477081923 msec\nrounds: 589"
-          },
-          {
             "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
             "value": 583.6469804932894,
             "unit": "iter/sec",
