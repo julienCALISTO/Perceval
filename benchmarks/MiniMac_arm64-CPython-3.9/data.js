@@ -1399,119 +1399,6 @@ window.BENCHMARK_DATA = {
             "username": "julienCALISTO",
             "email": "julien.calisto@quandela.com"
           },
-          "id": "5dafc2a353220751c8b9f617e3f7807dbadbbd93",
-          "message": "test venv.v2",
-          "timestamp": "2022-09-27T14:54:32Z",
-          "url": "https://github.com/julienCALISTO/Perceval/commit/5dafc2a353220751c8b9f617e3f7807dbadbbd93"
-        },
-        "date": 1664357785018,
-        "tool": "pytest",
-        "benches": [
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_clifford_6",
-            "value": 75.6784075192663,
-            "unit": "iter/sec",
-            "range": "stddev: 0.0000859982386286182",
-            "extra": "mean: 13.213808704225427 msec\nrounds: 71"
-          },
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_slos_6",
-            "value": 9.327665333964108,
-            "unit": "iter/sec",
-            "range": "stddev: 0.004576093608065894",
-            "extra": "mean: 107.20796299999928 msec\nrounds: 9"
-          },
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_naive_6",
-            "value": 1.43807461969079,
-            "unit": "iter/sec",
-            "range": "stddev: 0.05229792154369082",
-            "extra": "mean: 695.3742082000006 msec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_clifford_8",
-            "value": 205.35929410815854,
-            "unit": "iter/sec",
-            "range": "stddev: 0.000022031836724105122",
-            "extra": "mean: 4.869514206030142 msec\nrounds: 199"
-          },
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_slos_8",
-            "value": 3.138119136525206,
-            "unit": "iter/sec",
-            "range": "stddev: 0.0509353012866243",
-            "extra": "mean: 318.66221659999997 msec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_bosonsampling.py::test_bosonsampling_naive_8",
-            "value": 0.2771269342876731,
-            "unit": "iter/sec",
-            "range": "stddev: 0.40659305211320945",
-            "extra": "mean: 3.608454741399999 sec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_6",
-            "value": 0.35430282895958676,
-            "unit": "iter/sec",
-            "range": "stddev: 0.022065055749022122",
-            "extra": "mean: 2.8224442998 sec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_12",
-            "value": 0.08187390080588486,
-            "unit": "iter/sec",
-            "range": "stddev: 0.02052041524748169",
-            "extra": "mean: 12.213904433000007 sec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_6",
-            "value": 0.3757416141681832,
-            "unit": "iter/sec",
-            "range": "stddev: 0.002349199285371091",
-            "extra": "mean: 2.661403374799994 sec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_12",
-            "value": 0.08503672300848789,
-            "unit": "iter/sec",
-            "range": "stddev: 0.06525048265094277",
-            "extra": "mean: 11.759625308 sec\nrounds: 5"
-          },
-          {
-            "name": "benchmark/benchmark_stepper.py::test_stepper",
-            "value": 80.17740635271042,
-            "unit": "iter/sec",
-            "range": "stddev: 0.00008180465185702333",
-            "extra": "mean: 12.472341592104828 msec\nrounds: 76"
-          },
-          {
-            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_naive",
-            "value": 576.9218444957125,
-            "unit": "iter/sec",
-            "range": "stddev: 0.00003076764454490479",
-            "extra": "mean: 1.7333370361007914 msec\nrounds: 554"
-          },
-          {
-            "name": "benchmark/benchmark_stepper.py::test_stepper_comp_direct",
-            "value": 170.9671259280589,
-            "unit": "iter/sec",
-            "range": "stddev: 0.00003504554443876872",
-            "extra": "mean: 5.849077678364841 msec\nrounds: 171"
-          }
-        ]
-      },
-      {
-        "commit": {
-          "author": {
-            "name": "Julien Calisto",
-            "username": "julienCALISTO",
-            "email": "julien.calisto@quandela.com"
-          },
-          "committer": {
-            "name": "Julien Calisto",
-            "username": "julienCALISTO",
-            "email": "julien.calisto@quandela.com"
-          },
           "id": "778350927edcba05d79f0c1b0c2c58152b6789af",
           "message": "release/0.7 before PCVL-180",
           "timestamp": "2022-09-28T09:45:52Z",
@@ -1810,7 +1697,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "5651f862dcd365b73428e88a0015a4caea539dea",
-          "message": "modif benchmark name",
+          "message": "release/0.6",
           "timestamp": "2022-11-14T09:32:50Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/5651f862dcd365b73428e88a0015a4caea539dea"
         },
@@ -1867,7 +1754,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "a427beb9042f0cce3fd6be785cbe43d5ac791600",
-          "message": "modiff name output file benchmark",
+          "message": "release/0.7.1",
           "timestamp": "2022-11-14T12:18:50Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/a427beb9042f0cce3fd6be785cbe43d5ac791600"
         },
@@ -1987,7 +1874,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "a427beb9042f0cce3fd6be785cbe43d5ac791600",
-          "message": "modiff name output file benchmark",
+          "message": "release/0.7.1",
           "timestamp": "2022-11-14T12:18:50Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/a427beb9042f0cce3fd6be785cbe43d5ac791600"
         },
