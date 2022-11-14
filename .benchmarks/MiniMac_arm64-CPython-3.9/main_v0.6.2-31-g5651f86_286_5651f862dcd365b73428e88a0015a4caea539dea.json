@@ -1,0 +1,253 @@
+{
+    "machine_info": {
+        "node": "LT-040-22-AP.local",
+        "processor": "arm",
+        "machine": "arm64",
+        "python_compiler": "Clang 13.1.6 (clang-1316.0.21.2.3)",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.9.13",
+        "python_version": "3.9.13",
+        "python_build": [
+            "main",
+            "Sep 13 2022 10:45:38"
+        ],
+        "release": "21.4.0",
+        "system": "Darwin",
+        "cpu": {
+            "python_version": "3.9.13.final.0 (64 bit)",
+            "cpuinfo_version": [
+                8,
+                0,
+                0
+            ],
+            "cpuinfo_version_string": "8.0.0",
+            "arch": "ARM_8",
+            "bits": 64,
+            "count": 8,
+            "arch_string_raw": "arm64",
+            "brand_raw": "Apple M1"
+        }
+    },
+    "commit_info": {
+        "id": "5651f862dcd365b73428e88a0015a4caea539dea",
+        "time": "2022-11-14T10:32:50+01:00",
+        "author_time": "2022-11-14T10:32:50+01:00",
+        "dirty": false,
+        "project": "Perceval",
+        "branch": "main"
+    },
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_QML_DE_solver",
+            "fullname": "benchmark/benchmark_QML-DE-solver.py::test_QML_DE_solver",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 93.36927025,
+                "max": 93.58609016599996,
+                "mean": 93.514561375,
+                "stddev": 0.0885311294987115,
+                "rounds": 5,
+                "median": 93.52083412500002,
+                "iqr": 0.11041391649997934,
+                "q1": 93.475442719,
+                "q3": 93.58585663549998,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 93.36927025,
+                "hd15iqr": 93.58609016599996,
+                "ops": 0.010693521792717707,
+                "total": 467.57280687499997,
+                "data": [
+                    93.36927025,
+                    93.52083412500002,
+                    93.510833542,
+                    93.58609016599996,
+                    93.58577879199999
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_pdisplay_mplot_6",
+            "fullname": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_6",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 5.329439750000006,
+                "max": 5.392549834000079,
+                "mean": 5.352619783400018,
+                "stddev": 0.028739691331826533,
+                "rounds": 5,
+                "median": 5.337259249999988,
+                "iqr": 0.048214396250017444,
+                "q1": 5.3300852810000094,
+                "q3": 5.378299677250027,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 5.329439750000006,
+                "hd15iqr": 5.392549834000079,
+                "ops": 0.18682440383702978,
+                "total": 26.763098917000093,
+                "data": [
+                    5.329439750000006,
+                    5.37354962500001,
+                    5.337259249999988,
+                    5.330300458000011,
+                    5.392549834000079
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_pdisplay_mplot_12",
+            "fullname": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_12",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 23.269298790999983,
+                "max": 23.36237975000006,
+                "mean": 23.302204258200003,
+                "stddev": 0.03928998216947155,
+                "rounds": 5,
+                "median": 23.291225124999983,
+                "iqr": 0.06028277050003794,
+                "q1": 23.269362541749985,
+                "q3": 23.329645312250022,
+                "iqr_outliers": 0,
+                "stddev_outliers": 1,
+                "outliers": "1;0",
+                "ld15iqr": 23.269298790999983,
+                "hd15iqr": 23.36237975000006,
+                "ops": 0.04291439508981652,
+                "total": 116.51102129100002,
+                "data": [
+                    23.269298790999983,
+                    23.269383791999985,
+                    23.36237975000006,
+                    23.291225124999983,
+                    23.31873383300001
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_pdisplay_svg_6",
+            "fullname": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_6",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 5.165598250000016,
+                "max": 5.1745740420000175,
+                "mean": 5.169494008400034,
+                "stddev": 0.003324363277684047,
+                "rounds": 5,
+                "median": 5.169575458000054,
+                "iqr": 0.00389197849995071,
+                "q1": 5.167221406750059,
+                "q3": 5.17111338525001,
+                "iqr_outliers": 0,
+                "stddev_outliers": 2,
+                "outliers": "2;0",
+                "ld15iqr": 5.165598250000016,
+                "hd15iqr": 5.1745740420000175,
+                "ops": 0.19344253003777087,
+                "total": 25.847470042000168,
+                "data": [
+                    5.169959833000007,
+                    5.167762459000073,
+                    5.169575458000054,
+                    5.165598250000016,
+                    5.1745740420000175
+                ],
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_pdisplay_svg_12",
+            "fullname": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_12",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 22.759997124999927,
+                "max": 22.764956332999986,
+                "mean": 22.762329524799974,
+                "stddev": 0.002422630537961646,
+                "rounds": 5,
+                "median": 22.76180345900002,
+                "iqr": 0.0047307707500579,
+                "q1": 22.760087811999938,
+                "q3": 22.764818582749996,
+                "iqr_outliers": 0,
+                "stddev_outliers": 2,
+                "outliers": "2;0",
+                "ld15iqr": 22.759997124999927,
+                "hd15iqr": 22.764956332999986,
+                "ops": 0.04393223456810436,
+                "total": 113.81164762399987,
+                "data": [
+                    22.76011804099994,
+                    22.764956332999986,
+                    22.759997124999927,
+                    22.764772666,
+                    22.76180345900002
+                ],
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2022-11-14T09:53:20.460283",
+    "version": "3.4.1"
+}
