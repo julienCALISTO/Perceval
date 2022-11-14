@@ -1753,7 +1753,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "5651f862dcd365b73428e88a0015a4caea539dea",
-          "message": "modif benchmark name",
+          "message": "release/0.6",
           "timestamp": "2022-11-14T09:32:50Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/5651f862dcd365b73428e88a0015a4caea539dea"
         },
