@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1668419605304,
+  "lastUpdate": 1668429480899,
   "repoUrl": "https://github.com/julienCALISTO/Perceval",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -1794,6 +1794,63 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.002422630537961646",
             "extra": "mean: 22.762329524799974 sec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "committer": {
+            "name": "Julien Calisto",
+            "username": "julienCALISTO",
+            "email": "julien.calisto@quandela.com"
+          },
+          "id": "5651f862dcd365b73428e88a0015a4caea539dea",
+          "message": "modif benchmark name",
+          "timestamp": "2022-11-14T09:32:50Z",
+          "url": "https://github.com/julienCALISTO/Perceval/commit/5651f862dcd365b73428e88a0015a4caea539dea"
+        },
+        "date": 1668429479080,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "benchmark/benchmark_QML-DE-solver.py::test_QML_DE_solver",
+            "value": 0.010684382921583826,
+            "unit": "iter/sec",
+            "range": "stddev: 0.23442015726029944",
+            "extra": "mean: 93.59454891680002 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_6",
+            "value": 0.18612560665153086,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02232254206779503",
+            "extra": "mean: 5.372715866399972 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_mplot_12",
+            "value": 0.04272008649081776,
+            "unit": "iter/sec",
+            "range": "stddev: 0.042832070693282084",
+            "extra": "mean: 23.40819230820002 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_6",
+            "value": 0.1924768220687951,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0014458232314361853",
+            "extra": "mean: 5.195430749799994 sec\nrounds: 5"
+          },
+          {
+            "name": "benchmark/benchmark_pdisplay.py::test_pdisplay_svg_12",
+            "value": 0.043700659240868266,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005528120096293815",
+            "extra": "mean: 22.882949991399983 sec\nrounds: 5"
           }
         ]
       }
