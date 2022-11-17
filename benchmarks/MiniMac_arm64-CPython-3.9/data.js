@@ -1996,7 +1996,7 @@ window.BENCHMARK_DATA = {
             "email": "julien.calisto@quandela.com"
           },
           "id": "a427beb9042f0cce3fd6be785cbe43d5ac791600",
-          "message": "modiff name output file benchmark",
+          "message": "release/0.7.1 with build Qc",
           "timestamp": "2022-11-14T12:18:50Z",
           "url": "https://github.com/julienCALISTO/Perceval/commit/a427beb9042f0cce3fd6be785cbe43d5ac791600"
         },
