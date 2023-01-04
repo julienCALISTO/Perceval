@@ -28,7 +28,7 @@ on:
         type: string
         required: false
       save:
-        description: 'Save data'
+        description: 'commit data'
         default: false
         required: false
         type: boolean
@@ -142,13 +142,13 @@ jobs:
       - if: runner.os == 'Linux'
         name: setup var_env on linux
         run: |
-          echo "folder_env=${{ github.ref_name }}_${{ github.event.inputs.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
-          echo "folder_file_json=.benchmarks/${{ github.ref_name }}_${{ github.event.inputs.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_${{ github.ref_name }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
+          echo "folder_env=${{ github.event.inputs.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
+          echo "folder_file_json=.benchmarks/${{ github.event.inputs.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
       - if: runner.os != 'Linux'
         name: setup var_env on notLinux
         run: |
-          echo "folder_env=${{ github.ref_name }}_${{ github.event.inputs.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
-          echo "folder_file_json=.benchmarks/${{ github.ref_name }}_${{ github.event.inputs.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_${{ github.ref_name }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
+          echo "folder_env=${{ github.event.inputs.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
+          echo "folder_file_json=.benchmarks/${{ github.event.inputs.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
         shell: Bash
 
       - name: Run benchmark
@@ -156,23 +156,12 @@ jobs:
           python -m pytest benchmark/benchmark_*.py --benchmark-json out.json --benchmark-storage file://./.benchmarks/${{ env.folder_env }}/log/ 
           mv out.json ${{ env.folder_file_json }}
 
-      # upload the result on action GitHub
-      - name: upload the log result
-        uses: actions/upload-artifact@v3
-        with:
-          name: pytest_benchmarks_log_${{ env.folder_env }}_${{ github.run_number }}
-          path: ${{ env.folder_file_json }}
 
-      - name: checkout to avoid bug
-        uses: actions/checkout@v2
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
         with:
-          ref: gh-pages
-      
-      - name: Download the log result
-        uses: actions/download-artifact@v3
-        with:
-          name: pytest_benchmarks_log_${{ env.folder_env }}_${{ github.run_number }}
-          path: .benchmarks/${{ env.folder_env }}/log
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
 
       # use github-action-benchmark for graph
       - name: compare result with last version and save on current branch
@@ -182,30 +171,45 @@ jobs:
           tool: 'pytest'
           output-file-path: ${{ env.folder_file_json }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          auto-push: ${{ inputs.save }}
+          auto-push: false
           benchmark-data-dir-path: .benchmarks/${{ env.folder_env }}
+          save-data-file: true
+          external-data-json-path: ./cache/benchmark-data.json
           alert-threshold: '120%'
-          gh-pages-branch: ${{ steps.extract_branch.outputs.branch }}
           comment-on-alert: true
+
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
+
+      - name: upload the graph
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest_benchmarks_graph_${{ env.folder_env }}_${{ github.run_number }}
+          path: |
+            .benchmarks/${{ env.folder_env }} 
+            ./cache
 
       - name: checkout in current branch
         uses: actions/checkout@v2
         with:
           ref: ${{ steps.extract_branch.outputs.branch }}
 
-      - if: inputs.save_log
-        name: Download the Log result
+      - name: Download the log result
         uses: actions/download-artifact@v3
         with:
-          name: pytest_benchmarks_log_${{ env.folder_env }}_${{ github.run_number }}
-          path: .benchmarks/${{ env.folder_env }}/log
+          name: pytest_benchmarks_graph_${{ env.folder_env }}_${{ github.run_number }}
+          path: .benchmarks/${{ env.folder_env }}
 
-      - if: inputs.save_log
+
+      - if: inputs.save
         name: Save benchmark report in current branch
         run: |
           git pull
           git config --global user.name 'github-action-benchmark'
           git config --global user.email 'github@users.noreply.github.com'
-          git add ${{ env.folder_file_json }}
+          git add .benchmarks/${{ env.folder_env }}
           git commit -am "Automated benchmark log report"
           git push
