@@ -14,8 +14,8 @@ on:
     types: [ published ]
   workflow_dispatch:
     inputs:
-      os:
-        description: 'Choose Runner'
+      runner:
+        description: Runner
         required: true
         default: 'MiniMac_arm64'
         type: choice
@@ -32,53 +32,84 @@ on:
         default: ''
         type: string
         required: false
+      gh_branch:
+        description:  Use specific branch for save graph
+        default: 'gh-pages'
+        type: string
+        required: false
       save:
-        description: 'commit data'
+        description: save in the current github repository
         default: false
         required: false
         type: boolean
+      gh_repo:
+        description: Use specific github repository
+        default: 'github.com/julienCALISTO/test-workflow'
+        type: string
+        required: false
 
-env:
-  python_v: ${{ github.event.inputs.python_v || '3.9' }}
-  save_log: ${{ github.event.inputs.save_log || true }}
-  save: ${{ github.event.inputs.save || true }}
-  os: ${{ github.event.inputs.os || 'MiniMac_arm64' }}
-  commit_ref: ${{ github.event.inputs.commit_ref || '' }}
-  quandelibc_ref: ${{ github.event.inputs.quandelibc_ref || '' }}
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      save: ${{ steps.step1.outputs.save }}
+      runner: ${{ steps.step1.outputs.runner }}
+      os: ${{ steps.step1.outputs.os }}
+      commit_ref: ${{ steps.step1.outputs.commit_ref }}
+      quandelibc_ref: ${{ steps.step1.outputs.quandelibc_ref }}
+      python_v: ${{ steps.step1.outputs.python_v }}
+      python_v_cp: ${{ steps.step1.outputs.python_v_cp }}
+      folder_env: ${{ steps.step1.outputs.folder_env }}
+      folder_file_json: ${{ steps.step1.outputs.folder_file_json }}
+      gh_branch: ${{ steps.step1.outputs.gh_branch }}
+      gh_repo: ${{ steps.step1.outputs.gh_repo }}
+    steps:
+      - name: Check branch
+        id: step1
+        run: |
+          echo "save=${{ github.event.inputs.save == null || github.event.inputs.save }}" >> $GITHUB_OUTPUT
+          echo "runner=${{ github.event.inputs.runner || 'MiniMac_arm64' }}" >> $GITHUB_OUTPUT
+          if [ ${{ github.event.inputs.runner }} == 'ubuntu-latest' ]; then
+             echo "os=ubuntu-latest" >> $GITHUB_OUTPUT
+          else
+             echo "os=macos-latest" >> $GITHUB_OUTPUT
+          fi
+          echo "commit_ref=${{ github.event.inputs.commit_ref || '' }}" >> $GITHUB_OUTPUT
+          echo "quandelibc_ref=${{ github.event.inputs.quandelibc_ref || '' }}" >> $GITHUB_OUTPUT
+          echo "python_v=${{ github.event.inputs.python_v || '3.9' }}"  >> $GITHUB_OUTPUT
+          echo "python_v_cp=cp$( echo '${{github.event.inputs.python_v || '3.9'}}' | sed 's/\.\([0-9]\)/\1/' )" >> $GITHUB_OUTPUT
+          echo "folder_env=${{ github.event.inputs.os || 'MiniMac_arm64' }}-CPython-${{ github.event.inputs.python_v || '3.9' }}" >> $GITHUB_OUTPUT
+          echo "folder_file_json=.benchmarks/${{ github.event.inputs.os || 'MiniMac_arm64' }}-CPython-${{ github.event.inputs.python_v || '3.9' }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json"  >> $GITHUB_OUTPUT
+          echo "gh_branch=${{ github.event.inputs.gh_branch || 'main' }}" >> $GITHUB_OUTPUT
+          echo "gh_repo=${{ github.event.inputs.gh_repo || '' }}" >> $GITHUB_OUTPUT
+          
+          
+
   build-quandelibc:
-    if: env.quandelibc_ref != ''
-    name: Build quandelibc "${{ env.quandelibc_ref }}" wheels for ${{ env.os }}
-    runs-on: macos-latest
+    needs: [setup]
+    if: needs.setup.outputs.quandelibc_ref != ''
+    name: Build quandelibc ${{ needs.setup.outputs.quandelibc_ref }} wheels for ${{ needs.setup.outputs.os }}
+    runs-on: ${{ needs.setup.outputs.os }}
 
     steps:
-      - if: runner.os == 'Linux'
-        name: Initialize python_v_cp linux
-        run: |
-          echo "python_v_cp=cp$( echo '${{env.python_v}}' | sed 's/\.\([0-9]\)/\1/' )" >> $GITHUB_ENV
-      - if: runner.os != 'Linux'
-        name: Initialize python_v_cp notLinux
-        run: |
-          echo "python_v_cp=cp$( echo '${{env.python_v}}' | sed 's/\.\([0-9]\)/\1/' )" >> $GITHUB_ENV
-        shell: Bash
 
       - uses: actions/checkout@v3
         with:
           repository: Quandela/QuandeLibC
-          ref: ${{ env.quandelibc_ref }}
+          ref: ${{ needs.setup.outputs.quandelibc_ref }}
           path: quandelibc
           submodules: recursive
           fetch-depth: 0
 
-      - name: Set up Python ${{ env.python_v }}
+      - name: Set up Python ${{ needs.setup.outputs.python_v }}
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ env.python_v }}
+          python-version: ${{ needs.setup.outputs.python_v }}
 
-      - name: Build wheels for ${{ env.PYTHON_V_CP }}
+      - name: Build wheels for ${{ needs.setup.outputs.python_v_cp }}
         env:
-          CIBW_BUILD: '${{ env.PYTHON_V_CP }}-*'
+          CIBW_BUILD: '${{ needs.setup.outputs.python_v_cp }}-*'
           CIBW_SKIP: '*-musllinux_*'
           CIBW_ARCHS_LINUX: x86_64
           CIBW_ARCHS_MACOS: arm64
@@ -90,7 +121,7 @@ jobs:
           python -m cibuildwheel --output-dir precompiled-quandelibc
 
       - name: Store wheel
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: python-package-distributions
           path: quandelibc/precompiled-quandelibc
@@ -100,37 +131,38 @@ jobs:
     if: ${{ always() }}
     needs:
       - build-quandelibc
-    runs-on: ${{ env.os }}
+      - setup
+    runs-on: ${{ needs.setup.outputs.runner }}
     steps:
       - name: checkout on perceval's ref
         uses: actions/checkout@v2
         with:
-          ref: ${{ env.commit_ref }}
+          ref: ${{ needs.setup.outputs.commit_ref }}
           fetch-depth: 0
 
       # install python, already DL on MiniMac_arm64
-      - if:  ${{ env.os != 'MiniMac_arm64' }}
+      - if:  ${{ needs.setup.outputs.runner != 'MiniMac_arm64' }}
         name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.python_v }}
+          python-version: ${{ needs.setup.outputs.python_v }}
 
       - name: setup virtual env
         uses: syphar/restore-virtualenv@v1
         id: cache-virtualenv
 
-      - if: env.quandelibc_ref != ''
+      - if: needs.setup.outputs.quandelibc_ref != ''
         name: Fetch previously compiled Quandelibc
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: python-package-distributions
           path: precompiled-quandelibc
 
-      - if: env.quandelibc_ref != ''
+      - if: needs.setup.outputs.quandelibc_ref != ''
         name: Install previously compiled Quandelibc
         run: |
           python -m pip uninstall -y quandelibc
-          bash -c "python -m pip install precompiled-quandelibc/*macosx_11_0_arm64.whl"
+          bash -c "python -m pip install precompiled-quandelibc/*.whl"
 
       - name: Install dependencies
         run: |
@@ -138,63 +170,50 @@ jobs:
             python -m pip install -r requirements.txt pytest pytest-benchmark
             python -m pip install .
 
-      # save var env use bash shell for notLinux
-      - if: runner.os == 'Linux'
-        name: setup var_env on linux
-        run: |
-          echo "folder_env=${{ env.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
-          echo "folder_file_json=.benchmarks/${{ env.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
-      - if: runner.os != 'Linux'
-        name: setup var_env on notLinux
-        run: |
-          echo "folder_env=${{ env.os }}-CPython-${{ env.python_v }}" >> $GITHUB_ENV
-          echo "folder_file_json=.benchmarks/${{ env.os }}-CPython-${{ env.python_v }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json" >> $GITHUB_ENV
-        shell: Bash
-
       - name: Run benchmark
         run: |
-          python -m pytest benchmark/benchmark_*.py --benchmark-json out.json --benchmark-storage file://./.benchmarks/${{ env.folder_env }}/log/ 
-          mv out.json ${{ env.folder_file_json }}
+          python -m pytest benchmark/benchmark_*.py --benchmark-json out.json --benchmark-storage file://./.benchmarks/${{ needs.setup.outputs.folder_env }}/log/ 
+          mv out.json ${{ needs.setup.outputs.folder_file_json }}
 
       # use github-action-benchmark for graph
-      - if: github.event_name == 'push'
-        name: compare result with last version and save on current branch
+      - if: ${{ needs.setup.outputs.save == 'true' }}
+        name: create a graph and save on current repo
         uses: benchmark-action/github-action-benchmark@v1
         with:
-          name: Automated report
+          name: Automated benchmarks report
           tool: 'pytest'
-          output-file-path: ${{ env.folder_file_json }}
+          output-file-path: ${{ needs.setup.outputs.folder_file_json }}
+          benchmark-data-dir-path: .benchmarks/${{ needs.setup.outputs.folder_env }}
+          gh-pages-branch: ${{ needs.setup.outputs.gh_branch }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          benchmark-data-dir-path: .benchmarks/${{ env.folder_env }}
-          gh-pages-branch: 'main'
-          auto-push: ${{ env.save }}
+          auto-push: true
           alert-threshold: '120%'
           comment-on-alert: true
 
-      - if: github.event_name == 'workflow_dispatch'
-        name: compare result with last version and save on current branch
+      - if: ${{ github.event_name == 'workflow_dispatch' && needs.setup.outputs.save == 'false' }}
+        name: create a graph and save on private repo
         uses: benchmark-action/github-action-benchmark@v1
         with:
-          name: Automated report
+          name: Automated benchmarks report
           tool: 'pytest'
-          output-file-path: ${{ env.folder_file_json }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          benchmark-data-dir-path: .benchmarks/${{ env.folder_env }}
-          gh-pages-branch: 'main'
-          gh-repository:
-          auto-push: ${{ env.save }}
+          output-file-path: ${{ needs.setup.outputs.folder_file_json }}
+          benchmark-data-dir-path: .benchmarks/${{ needs.setup.outputs.folder_env }}
+          gh-pages-branch: ${{ needs.setup.outputs.gh_branch }}
+          github-token: ${{ secrets.GH_BENCHMARKS_TOKEN }}
+          gh-repository: ${{ needs.setup.outputs.gh_repo }}
+          auto-push: true
           alert-threshold: '120%'
           comment-on-alert: true
 
       - name: upload the log result
         uses: actions/upload-artifact@v3
         with:
-          name: pytest_benchmarks_graph_${{ env.folder_env }}_${{ github.run_number }}
+          name: pytest_benchmarks_graph_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
           path: |
-            .benchmarks/${{ env.folder_env }}
+            .benchmarks/${{ needs.setup.outputs.folder_env }}
 
       - name: Download the log result
         uses: actions/download-artifact@v3
         with:
-          name: pytest_benchmarks_graph_${{ env.folder_env }}_${{ github.run_number }}
-          path: .benchmarks/${{ env.folder_env }}
+          name: pytest_benchmarks_graph_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
+          path: .benchmarks/${{ needs.setup.outputs.folder_env }}
