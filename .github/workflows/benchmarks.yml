@@ -166,7 +166,7 @@ jobs:
       - name: upload the log result
         uses: actions/upload-artifact@v3
         with:
-          name: pytest_benchmarks_log
+          name: pytest_benchmarks_log_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
           path: ${{ needs.setup.outputs.folder_file_json }}
 
       - name: checkout in Initial commit to avoid bug
@@ -205,7 +205,7 @@ jobs:
           benchmark-data-dir-path: .benchmarks/${{ needs.setup.outputs.folder_env }}
           gh-pages-branch: ${{ needs.setup.outputs.gh_branch }}
           github-token: ${{ secrets.PERCEVAL_BENCHMARK_TOKEN }}
-          gh-repository: 'github.com/Quandela/Perceval-PrivateBenchmark.git'
+          gh-repository: 'github.com/Quandela/Perceval-PrivateBenchmark'
           auto-push: true
           alert-threshold: '120%'
           comment-on-alert: true
@@ -213,10 +213,23 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: Quandela/Perceval-PrivateBenchmark
-          ref: main
+          ref: ${{ needs.setup.outputs.gh_branch }}
           path: Perceval-PrivateBenchmark
+          token: ${{ secrets.PERCEVAL_BENCHMARK_TOKEN }}
           submodules: recursive
           fetch-depth: 0
+
+      - name: upload the log result
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest_benchmarks
+          path: Perceval-PrivateBenchmark/.benchmarks/${{ needs.setup.outputs.folder_env }}/
+
+      - name: Download the log result
+        uses: actions/download-artifact@v3
+        with:
+          name: pytest_benchmarks
+          path: Perceval-PrivateBenchmark/.benchmarks/${{ needs.setup.outputs.folder_env }}/
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -225,4 +238,4 @@ jobs:
           known_hosts: ${{ secrets.PERCEVAL_WEB_KNOWN_HOST }}
 
       - name: Deploy
-        run: rsync -avz Perceval-PrivateBenchmark/.benchmarks/${{ needs.setup.outputs.folder_env }} ${{secrets.PERCEVAL_WEB_USER}}@${{secrets.PERCEVAL_WEB_HOST}}:/var/www/html-benchmark
+        run: rsync -avz Perceval-PrivateBenchmark/.benchmarks/${{ needs.setup.outputs.folder_env }}/ ${{secrets.PERCEVAL_WEB_USER}}@${{secrets.PERCEVAL_WEB_HOST}}:/var/www/html-benchmark
