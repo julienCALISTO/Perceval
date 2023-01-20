@@ -6,12 +6,6 @@
 name: Benchmarks
 
 on:
-  push:
-    branches:
-      - main
-      - release/*
-  release:
-    types: [ published ]
   workflow_dispatch:
     inputs:
       runner:
@@ -32,19 +26,14 @@ on:
         default: ''
         type: string
         required: false
-      gh_branch:
-        description:  Use specific branch for save graph
-        default: 'gh-pages'
-        type: string
-        required: false
       save:
         description: save in the current github repository
         default: false
         required: false
         type: boolean
-      gh_repo:
-        description: Use specific github repository
-        default: 'github.com/julienCALISTO/test-workflow'
+      gh_branch:
+        description: Use specific branch for save graph
+        default: 'main'
         type: string
         required: false
 
@@ -63,7 +52,6 @@ jobs:
       folder_env: ${{ steps.step1.outputs.folder_env }}
       folder_file_json: ${{ steps.step1.outputs.folder_file_json }}
       gh_branch: ${{ steps.step1.outputs.gh_branch }}
-      gh_repo: ${{ steps.step1.outputs.gh_repo }}
     steps:
       - name: Check branch
         id: step1
@@ -82,7 +70,6 @@ jobs:
           echo "folder_env=${{ github.event.inputs.os || 'MiniMac_arm64' }}-CPython-${{ github.event.inputs.python_v || '3.9' }}" >> $GITHUB_OUTPUT
           echo "folder_file_json=.benchmarks/${{ github.event.inputs.os || 'MiniMac_arm64' }}-CPython-${{ github.event.inputs.python_v || '3.9' }}/log/${{ github.run_number }}_$( git describe --tags )_${{ github.sha }}.json"  >> $GITHUB_OUTPUT
           echo "gh_branch=${{ github.event.inputs.gh_branch || 'main' }}" >> $GITHUB_OUTPUT
-          echo "gh_repo=${{ github.event.inputs.gh_repo || '' }}" >> $GITHUB_OUTPUT
           
           
 
@@ -116,7 +103,7 @@ jobs:
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_BUILD_VERBOSITY: 1
         run: |
-          cd quandelibc
+          cd quandelibc 
           python -m pip install cibuildwheel
           python -m cibuildwheel --output-dir precompiled-quandelibc
 
@@ -175,6 +162,24 @@ jobs:
           python -m pytest benchmark/benchmark_*.py --benchmark-json out.json --benchmark-storage file://./.benchmarks/${{ needs.setup.outputs.folder_env }}/log/ 
           mv out.json ${{ needs.setup.outputs.folder_file_json }}
 
+      # upload the result on action GitHub
+      - name: upload the log result
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest_benchmarks_log
+          path: ${{ needs.setup.outputs.folder_file_json }}
+
+      - name: checkout in Initial commit to avoid bug
+        uses: actions/checkout@v2
+        with:
+          ref: 217f0c716956da75eac217e9bc089f881bd5a2aa
+
+      - name: Download the log result
+        uses: actions/download-artifact@v3
+        with:
+          name: pytest_benchmarks_log_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
+          path: .benchmarks/${{ needs.setup.outputs.folder_env }}/log
+
       # use github-action-benchmark for graph
       - if: ${{ needs.setup.outputs.save == 'true' }}
         name: create a graph and save on current repo
@@ -199,21 +204,25 @@ jobs:
           output-file-path: ${{ needs.setup.outputs.folder_file_json }}
           benchmark-data-dir-path: .benchmarks/${{ needs.setup.outputs.folder_env }}
           gh-pages-branch: ${{ needs.setup.outputs.gh_branch }}
-          github-token: ${{ secrets.GH_BENCHMARKS_TOKEN }}
-          gh-repository: ${{ needs.setup.outputs.gh_repo }}
+          github-token: ${{ secrets.PERCEVAL_BENCHMARK_TOKEN }}
+          gh-repository: 'github.com/Quandela/Perceval-PrivateBenchmark.git'
           auto-push: true
           alert-threshold: '120%'
           comment-on-alert: true
 
-      - name: upload the log result
-        uses: actions/upload-artifact@v3
+      - uses: actions/checkout@v3
         with:
-          name: pytest_benchmarks_graph_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
-          path: |
-            .benchmarks/${{ needs.setup.outputs.folder_env }}
+          repository: Quandela/Perceval-PrivateBenchmark
+          ref: main
+          path: Perceval-PrivateBenchmark
+          submodules: recursive
+          fetch-depth: 0
 
-      - name: Download the log result
-        uses: actions/download-artifact@v3
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          name: pytest_benchmarks_graph_${{ needs.setup.outputs.folder_env }}_${{ github.run_number }}
-          path: .benchmarks/${{ needs.setup.outputs.folder_env }}
+          key: ${{ secrets.PERCEVAL_WEB_SSHKEY }}
+          known_hosts: ${{ secrets.PERCEVAL_WEB_KNOWN_HOST }}
+
+      - name: Deploy
+        run: rsync -avz Perceval-PrivateBenchmark/.benchmarks/${{ needs.setup.outputs.folder_env }} ${{secrets.PERCEVAL_WEB_USER}}@${{secrets.PERCEVAL_WEB_HOST}}:/var/www/html-benchmark
